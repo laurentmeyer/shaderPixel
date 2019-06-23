@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Square.h"
+#include "Mesh.h"
 #include <iostream>
 #include <cmath>
 #include <glm/glm.hpp>
@@ -22,8 +23,12 @@ int main()
 	}
 
   Camera camera;
-  Shader shader("shaders/shader.vs", "shaders/shader.fs");
+  std::shared_ptr<Shader> shader(std::make_shared<Shader>("shaders/shader.vs", "shaders/shader.fs"));
+  std::shared_ptr<Material> material(std::make_shared<Material>());
+  material->setShader(shader);
+  //Shader shader("shaders/shader.vs", "shaders/shader.fs");
   Square square;
+  square.draw();
 
   while (!window.shouldClose())
   {
